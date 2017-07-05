@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<project name="lium-diarization" default="jar" basedir=".">
+<project name="lium-diarization" default="stand-alone-jar" basedir=".">
 
     <property name="src.dir" location="src"/>
     <property name="build.dir" location="build"/>
@@ -41,18 +41,12 @@
         <delete dir="${build.dir}"/>
     </target>
 
-    <property name="main-class" value="fr.lium.spkDiarization.system.Diarization"/>
-
     <!-- standalone jar. -->
     <target name="stand-alone-jar" depends="jar">
         <taskdef name="jarjar"
                  classname="org.pantsbuild.jarjar.JarJarTask"
                  classpath="lib-dev/jarjar.jar"/>
         <jarjar jarfile="lium-diarization-full.jar">
-            <manifest>
-                <attribute name="Main-Class" value="${main-class}"/>
-            </manifest>
-            <!--<fileset dir="${build.dir}"/>-->
             <zipfileset src="lium-diarization.jar"/>
             <zipfileset src="lib/xstream-1.4.10.jar"/>
         </jarjar>
